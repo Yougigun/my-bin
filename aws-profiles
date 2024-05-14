@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# List available AWS profiles
+profiles=$(aws configure list-profiles)
+
+# Use fzf to select a profile
+selected_profile=$(echo "$profiles" | fzf --prompt="Select AWS Profile: ")
+
+# Check if a profile was selected
+if [ -n "$selected_profile" ]; then
+    export AWS_PROFILE=$selected_profile
+    echo "Selected AWS Profile: $selected_profile"
+else
+    echo "No profile selected."
+fi
